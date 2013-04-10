@@ -1,7 +1,6 @@
 package org.transifex.lucene.search;
 
 import org.apache.lucene.index.FieldInvertState;
-import org.apache.lucene.index.Norm;
 import org.apache.lucene.search.similarities.DefaultSimilarity;
 
 
@@ -26,16 +25,16 @@ public class CoordSimilarity extends DefaultSimilarity {
     }
 
     @Override
-    public void computeNorm(FieldInvertState state, Norm norm) {
+    public float lengthNorm(FieldInvertState state) {
         // We do not care about normalizing the document, so use a
         // fair normalization. See
-        // https://lucene.apache.org/core/4_0_0/core/org/apache/lucene/search/similarities/package-summary.html
+        // https://lucene.apache.org/core/4_2_1/core/org/apache/lucene/search/similarities/package-summary.html
         final int numTerms;
         if (discountOverlaps)
             numTerms = state.getLength() - state.getNumOverlap();
         else
             numTerms = state.getLength();
-        norm.setByte(super.encodeNormValue(1.0f / numTerms));
+        return state.getBoost() * ((float) (1.0f / numTerms));
     }
 
     @Override

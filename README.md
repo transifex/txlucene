@@ -18,7 +18,7 @@ customizing the score formula by zeroing out the score in this case.
 
 * Compile the java file with:
 
-    javac -Xlint:deprecation -classpath /path/lucene-4.0.0/core/src/java/ org/transifex/com/search/CoordSimilarity.java
+    javac -Xlint:deprecation -classpath /path/lucene-4.2.1/core/src/java/ org/transifex/lucene/search/CoordSimilarity.java
 
     jar cvf txsearcher.jar -C src .
 
