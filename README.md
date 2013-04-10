@@ -1,3 +1,19 @@
+## Introduction
+
+This library intervenes the normal search process and changes the score of the
+matching documents.
+
+By default, lucene will return all documents that match at least one term of
+those specified in the search query. However, when it comes to TM engines, it
+only makes sense to get results that have enough terms similar to the original
+phrase; otherwise, both the levenshtein distance and the quality of the match
+would be low.
+
+For this reason, the library will assign a zero score to all matching documents
+that have less than at half matching terms to the original phrase. We do this by
+customizing the score formula by zeroing out the score in this case.
+
+
 ## How to use
 
 * Compile the java file with:
